@@ -5,8 +5,7 @@
 ## GithubAction
 
 1.Fork此项目，修改`/.github/workflows/SSLCheck.yml`
-2.添加变量`TOKEN`为GithubToken
-3.保存，该项目会在UTC每天早上5点更新SSL信息
+2.保存，该项目会在UTC每天早上5点更新SSL信息
 
 ## Check：https://ssl.mhuig.top
 
