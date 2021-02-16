@@ -10,20 +10,17 @@ on:
 jobs:
   CheckSSL:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-
+    - name: Setup Python 3.7
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.7'
+        architecture: 'x64'
     - name: Build
       run: |
-        mkdir ./public
-        mv ./index.html ./public
-        chmod +x checker.sh
-        ./checker.sh mhuig.top blog.mhuig.top friends.mhuig.top ssl.mhuig.top
-        cp -rf ./output/ct.json ./public/ct.json
-        echo "ssl.mhuig.top" > ./public/CNAME
-        
+        python main.py
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:

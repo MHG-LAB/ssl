@@ -5,7 +5,7 @@
 
 ## GithubAction
 
-1.Fork此项目，修改`/.github/workflows/SSLCheck.yml`
+1.Fork此项目，修改`domains`
 
 2.保存，该项目会在UTC每天早上5点更新SSL信息
 
