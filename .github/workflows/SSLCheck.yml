@@ -15,20 +15,14 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Setup node
-      uses: actions/setup-node@v1
-      with:
-        node-version: '10'
-
     - name: Install & Build
       run: |
-        npm i
-        npm run build
-        cd CheckSSL
+        mkdir ./public
+        mv ./index.html ./public
         chmod +x checker.sh
         ./checker.sh mhuig.top blog.mhuig.top friends.mhuig.top ssl.mhuig.top
-        cp -rf ./output/ct.json ../public/ct.json
-        echo "ssl.mhuig.top" > ../public/CNAME
+        cp -rf ./output/ct.json ./public/ct.json
+        echo "ssl.mhuig.top" > ./public/CNAME
         
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
