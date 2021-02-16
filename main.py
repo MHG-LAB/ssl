@@ -3,31 +3,41 @@ import time
 
 def check(domain):
     item={}
-    item["domain"] = domain
-    c = ssl.create_default_context()
-    s = c.wrap_socket(socket.socket(), server_hostname=item["domain"])
-    s.connect((item["domain"], 443))
-    cert = s.getpeercert()
+    try:
+        item["domain"] = domain
+        c = ssl.create_default_context()
+        s = c.wrap_socket(socket.socket(), server_hostname=item["domain"])
+        s.connect((item["domain"], 443))
+        cert = s.getpeercert()
 
-    item["subject"]=cert['subject']
-    item["start"]=cert['notBefore']
-    item["expire"]=cert['notAfter']
-    item["issuer"]=cert['issuer']
-    item["check"]=time.ctime(time.time())
-    nowstamp=time.mktime(time.strptime(time.ctime(time.time()),"%a %b %d %H:%M:%S %Y"))
-    expirestamp=time.mktime(time.strptime(item["expire"],"%b %d %H:%M:%S %Y GMT"))
-    item["remain"]=int((expirestamp-nowstamp)/86400)
+        item["subject"]=cert['subject']
+        item["start"]=cert['notBefore']
+        item["expire"]=cert['notAfter']
+        item["issuer"]=cert['issuer']
+        item["check"]=time.ctime(time.time())
+        nowstamp=time.mktime(time.strptime(time.ctime(time.time()),"%a %b %d %H:%M:%S %Y"))
+        expirestamp=time.mktime(time.strptime(item["expire"],"%b %d %H:%M:%S %Y GMT"))
+        item["remain"]=int((expirestamp-nowstamp)/86400)
 
-    if expirestamp<nowstamp:
-        item["status"]="Expired"
-        item["statuscolor"]="error"
-    elif item["remain"]<10 and item["remain"]>=0:
-        item["status"]="Soon Expired"
-        item["statuscolor"]="warning"
-    elif item["remain"]>=10:
-        item["status"]="Valid"
-        item["statuscolor"]="success"
-    else:
+        if expirestamp<nowstamp:
+            item["status"]="Expired"
+            item["statuscolor"]="error"
+        elif item["remain"]<10 and item["remain"]>=0:
+            item["status"]="Soon Expired"
+            item["statuscolor"]="warning"
+        elif item["remain"]>=10:
+            item["status"]="Valid"
+            item["statuscolor"]="success"
+        else:
+            item["status"]="Invalid"
+            item["statuscolor"]="error"
+    except:
+        item["subject"]="Invalid"
+        item["start"]="Invalid"
+        item["expire"]="Invalid"
+        item["issuer"]="Invalid"
+        item["remain"]="0"
+        item["check"]=time.ctime(time.time())
         item["status"]="Invalid"
         item["statuscolor"]="error"
     return item
