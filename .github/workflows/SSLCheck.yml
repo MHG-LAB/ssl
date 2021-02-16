@@ -15,7 +15,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Install & Build
+    - name: Build
       run: |
         mkdir ./public
         mv ./index.html ./public
