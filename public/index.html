@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>SSL透明度报告</title>
+    <link rel="shortcut icon" type="image/x-icon" sizes="16x16 32x32 48x48 64x64" href="https://cdn.jsdelivr.net/npm/mhg@0.0.0/favicon/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="SSL透明度报告">
+    <meta name="theme-color" content="#F6B352">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.1/dist/semantic.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/suka.css@0.1.2">
+    <style>
+        .item-title {
+            color: #adadad
+        }
+
+        .ui.table tr td,
+        .ui.table,
+        .ui.table tbody {
+            border: none;
+        }
+
+        .ui.table tr td {
+            padding: .3rem;
+            line-height: 1.2rem;
+        }
+    </style>
+    <!--[if lt IE 9]><script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3"></script><script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script><![endif]-->
+    <meta property="og:type" content="Website">
+    <meta name="twitter:card" content="summary">
+</head>
+
+<body class="sk-p-4 sk-pt-8 sk-pb-6">
+    <h1 class="ui center aligned header">
+        <i id="icon" class="expeditedssl icon" data-position="left center" style="color: #009688;"></i>SSL Status</h1>
+    <div class="ui container sk-pt-4">
+        <div class="ui container two column stackable grid container" id="result">
+
+		</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.1/dist/semantic.min.js"></script>
+	<script type="text/javascript">
+		var result = "./result.txt?" + new Date().getTime() + Math.random()
+         $.ajax({
+		 url:result,
+		 dataType:'text',
+		 success:function(data){
+			$("#result").append(data);
+		}
+		});
+	</script>
+</body>
+
+</html>

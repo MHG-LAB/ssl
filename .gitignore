@@ -4,5 +4,5 @@ node_modules
 .idea
 .directory
 _build
-public/index.html
+public/result.txt
 dist
