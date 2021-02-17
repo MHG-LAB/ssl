@@ -94,6 +94,10 @@ def get(item):
                                 <td>'''+str(item["subject"])+'''</td>
                             </tr>
                             <tr>
+                                <td class="item-title sk-text-right">SubjectAltName</td>
+                                <td>'''+str(item["subjectAltName"])+'''</td>
+                            </tr>
+                            <tr>
                                 <td class="item-title sk-text-right">Valid from</td>
                                 <td>'''+str(item['notBefore'])+'''</td>
                             </tr>
@@ -116,10 +120,6 @@ def get(item):
                             <tr>
                                 <td class="item-title sk-text-right">SerialNumber</td>
                                 <td>'''+str(item["serialNumber"])+'''</td>
-                            </tr>
-                            <tr>
-                                <td class="item-title sk-text-right">SubjectAltName</td>
-                                <td>'''+str(item["subjectAltName"])+'''</td>
                             </tr>
                             <tr>
                                 <td class="item-title sk-text-right">OCSP</td>

@@ -7,7 +7,7 @@
 
 1.Fork此项目，修改`domains`
 
-2.保存，该项目会在UTC每天早上5点更新SSL信息
+2.保存，该项目会在UTC+8每天早上5点更新SSL信息
 
 ## Check：https://ssl.mhuig.top
 
