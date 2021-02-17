@@ -9,11 +9,11 @@ def tup2str(tup):
         for i in a:
             if str(type(i[0]))=="<class 'str'>":
                 if len(i)==1:
-                    S+=i[0]+";"
+                    S+=i[0]+"; "
                 elif len(i)==2:
-                    S=S+i[0]+"="+i[1]+";"
+                    S=S+i[0]+"="+i[1]+"; "
                 else:
-                    S+=str(i)+";"
+                    S+=str(i)+"; "
             elif str(type(i))=="<class 'tuple'>":
                 tt(i)
             else:
