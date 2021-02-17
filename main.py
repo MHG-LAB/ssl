@@ -64,7 +64,6 @@ def check(domain):
         item["subjectAltName"]="Invalid"
         item["OCSP"]="Invalid"
         item["caIssuers"]="Invalid"
-        
         item["subject"]="Invalid"
         item['notBefore']="Invalid"
         item['notAfter']="Invalid"
@@ -75,82 +74,22 @@ def check(domain):
         item["statuscolor"]="error"
     return item
 
-def get(item):
-    rs='''<div class="column" v-for="item in items">
-            <div class="ui segment">
-                <h3 class="ui floated header sk-pl-2">'''+str(item["domain"])+'''&nbsp;&nbsp;
-                    <small class="sk-text-'''+str(item["statuscolor"])+'''">'''+str(item["status"])+'''</small>
-                </h3>
-                <div class="ui clearing divider"></div>
-                <div class="sk-pl-2">
-                    <table class="ui collapsing table unstackable">
-                        <tbody>
-                            <tr>
-                                <td class="item-title sk-text-right">Last check</td>
-                                <td>'''+str(item["check"])+'''</td>
-                            </tr>
-                            <tr>
-                                <td class="item-title sk-text-right">Subject</td>
-                                <td>'''+str(item["subject"])+'''</td>
-                            </tr>
-                            <tr>
-                                <td class="item-title sk-text-right">SubjectAltName</td>
-                                <td>'''+str(item["subjectAltName"])+'''</td>
-                            </tr>
-                            <tr>
-                                <td class="item-title sk-text-right">Valid from</td>
-                                <td>'''+str(item['notBefore'])+'''</td>
-                            </tr>
-                            <tr>
-                                <td class="item-title sk-text-right">Valid until</td>
-                                <td>'''+str(item['notAfter'])+'''</td>
-                            </tr>
-                            <tr>
-                                <td class="item-title sk-text-right">Remaining</td>
-                                <td>'''+str(item["remain"])+''' Days</td>
-                            </tr>
-                            <tr>
-                                <td class="item-title sk-text-right">Issuer</td>
-                                <td>'''+str(item["issuer"])+'''</td>
-                            </tr>
-                            <tr>
-                                <td class="item-title sk-text-right">Version</td>
-                                <td>'''+str(item["version"])+'''</td>
-                            </tr>
-                            <tr>
-                                <td class="item-title sk-text-right">SerialNumber</td>
-                                <td>'''+str(item["serialNumber"])+'''</td>
-                            </tr>
-                            <tr>
-                                <td class="item-title sk-text-right">OCSP</td>
-                                <td>'''+str(item["OCSP"])+'''</td>
-                            </tr>
-                            <tr>
-                                <td class="item-title sk-text-right">CaIssuers</td>
-                                <td>'''+str(item["caIssuers"])+'''</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    '''
-    return rs
-
-
-
+def listToJson(lst):
+    import json
+    str_json = json.dumps(lst)  # json转为string
+    return str_json
 
 f = open("./domains", "rb")
 File = f.read().decode("utf8","ignore")
 f.close()
 Lines = File.splitlines()
-result=""
+result=[]
 for i in Lines:
     if i:
         print(i)
-        result+=get(check(i))
+        result.append(check(i))
 
 
-f = open("./public/result.txt", "w",encoding="utf-8")
-print(result,file = f)
+f = open("./public/ct.json", "w",encoding="utf-8")
+print(listToJson(result),file = f)
 f.close()

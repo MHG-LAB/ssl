@@ -44,16 +44,74 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.1/dist/semantic.min.js"></script>
-	<script type="text/javascript">
-		var result = "./result.txt?" + new Date().getTime() + Math.random()
-         $.ajax({
-		 url:result,
-		 dataType:'text',
-		 success:function(data){
-			$("#result").append(data);
-		}
-		});
-	</script>
+    <script type="text/javascript">
+        var ctJson = "./ct.json?" + new Date().getTime() + Math.random()
+        $.getJSON(ctJson, function (data) {
+            console.log(data)
+            $.each(data, function (index, value) {
+                $("#result").append(`
+        <div class="column" v-for="item in items">
+            <div class="ui segment">
+                <h3 class="ui floated header sk-pl-2">${value.domain}&nbsp;&nbsp;
+                    <small class="sk-text-${value.statuscolor}">${value.status}</small>
+                </h3>
+                <div class="ui clearing divider"></div>
+                <div class="sk-pl-2">
+                    <table class="ui collapsing table unstackable">
+                        <tbody>
+                            <tr>
+                                <td class="item-title sk-text-right">Last check</td>
+                                <td>${value.check}</td>
+                            </tr>
+                            <tr>
+                                <td class="item-title sk-text-right">Subject</td>
+                                <td>${value.subject}</td>
+                            </tr>
+                            <tr>
+                                <td class="item-title sk-text-right">SubjectAltName</td>
+                                <td>${value.subjectAltName}</td>
+                            </tr>
+                            <tr>
+                                <td class="item-title sk-text-right">Valid from</td>
+                                <td>${value.notBefore}</td>
+                            </tr>
+                            <tr>
+                                <td class="item-title sk-text-right">Valid until</td>
+                                <td>${value.notAfter}</td>
+                            </tr>
+                            <tr>
+                                <td class="item-title sk-text-right">Remaining</td>
+                                <td>${value.remain} Days</td>
+                            </tr>
+                            <tr>
+                                <td class="item-title sk-text-right">Issuer</td>
+                                <td>${value.issuer}</td>
+                            </tr>
+                            <tr>
+                                <td class="item-title sk-text-right">Version</td>
+                                <td>${value.version}</td>
+                            </tr>
+                            <tr>
+                                <td class="item-title sk-text-right">SerialNumber</td>
+                                <td>${value.serialNumber}</td>
+                            </tr>
+                            <tr>
+                                <td class="item-title sk-text-right">OCSP</td>
+                                <td>${value.OCSP}</td>
+                            </tr>
+                            <tr>
+                                <td class="item-title sk-text-right">CaIssuers</td>
+                                <td>${value.caIssuers}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+                `);
+            });
+        });
+		</script>
 </body>
 
 </html>
