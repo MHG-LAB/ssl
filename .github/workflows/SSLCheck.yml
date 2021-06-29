@@ -6,7 +6,7 @@ on:
       - master
   schedule:
     - cron: '0 21 * * *' 
-
+  workflow_dispatch:
 jobs:
   CheckSSL:
     runs-on: ubuntu-latest
